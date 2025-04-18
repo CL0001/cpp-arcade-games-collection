@@ -6,6 +6,7 @@
 
 #include "snake.h"
 #include "apple.h"
+#include "button.h"
 
 class Game
 {
@@ -17,7 +18,14 @@ public:
 	void Draw();
 	void Update();
 
-	void UpdateScoreText();
+	void LoadBestScore();
+
+	void UpdateCurrentScoreText();
+	void UpdateBestScoreText();
+
+	void CheckGameOver();
+
+	void Restart();
 
 private:
 	Rectangle map_border_;
@@ -29,4 +37,8 @@ private:
 
 	Snake snake_;
 	Apple apple_;
+
+	bool is_game_over_;
+
+	Button play_again_button_;
 };

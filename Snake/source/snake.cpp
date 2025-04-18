@@ -9,11 +9,29 @@
 void Snake::Init()
 {
 	sprite_ = LoadTexture((std::string(ASSETS_PATH) + "snake.png").c_str());
+
 	body_ = { Vector2{MAP_START_X + TILE_SIZE * SCALE * 9, MAP_START_Y + TILE_SIZE * SCALE * 9},
 			  Vector2{MAP_START_X + TILE_SIZE * SCALE * 9, MAP_START_Y + TILE_SIZE * SCALE * 10},
 		      Vector2{MAP_START_X + TILE_SIZE * SCALE * 9, MAP_START_Y + TILE_SIZE * SCALE * 11}
 	};
-	direction_ = HeadDirection::Up;
+
+	current_direction_ = HeadDirection::Up;
+	next_direction_ = current_direction_;
+
+	move_timer_ = 0.0f;
+	move_interval_ = 0.2f;
+}
+
+void Snake::Reset()
+{
+	body_ = { Vector2{MAP_START_X + TILE_SIZE * SCALE * 9, MAP_START_Y + TILE_SIZE * SCALE * 9},
+			  Vector2{MAP_START_X + TILE_SIZE * SCALE * 9, MAP_START_Y + TILE_SIZE * SCALE * 10},
+			  Vector2{MAP_START_X + TILE_SIZE * SCALE * 9, MAP_START_Y + TILE_SIZE * SCALE * 11}
+	};
+
+	current_direction_ = HeadDirection::Up;
+	next_direction_ = current_direction_;
+
 	move_timer_ = 0.0f;
 	move_interval_ = 0.2f;
 }
@@ -44,7 +62,7 @@ void Snake::Draw()
 
 void Snake::Update()
 {
-	ChangeDirection();
+	ChangeDirection(); 
 
 	move_timer_ += GetFrameTime();
 
@@ -53,22 +71,21 @@ void Snake::Update()
 
 	move_timer_ = 0.0f;
 
+	current_direction_ = next_direction_;
+
 	Vector2 head = body_.front();
 
-	switch (direction_)
+	switch (current_direction_)
 	{
 	case HeadDirection::Left:
 		head.x -= TILE_SIZE * SCALE;
 		break;
-
 	case HeadDirection::Up:
 		head.y -= TILE_SIZE * SCALE;
 		break;
-
 	case HeadDirection::Right:
 		head.x += TILE_SIZE * SCALE;
 		break;
-
 	case HeadDirection::Down:
 		head.y += TILE_SIZE * SCALE;
 		break;
@@ -78,26 +95,27 @@ void Snake::Update()
 	body_.pop_back();
 }
 
+
 void Snake::ChangeDirection()
 {
-	if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && direction_ != HeadDirection::Down)
-		direction_ = HeadDirection::Up;
+	if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && current_direction_ != HeadDirection::Down)
+		next_direction_ = HeadDirection::Up;
 
-	else if ((IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) && direction_ != HeadDirection::Up)
-		direction_ = HeadDirection::Down;
+	if ((IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) && current_direction_ != HeadDirection::Up)
+		next_direction_ = HeadDirection::Down;
 
-	else if ((IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) && direction_ != HeadDirection::Right)
-		direction_ = HeadDirection::Left;
+	if ((IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) && current_direction_ != HeadDirection::Right)
+		next_direction_ = HeadDirection::Left;
 
-	else if ((IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) && direction_ != HeadDirection::Left)
-		direction_ = HeadDirection::Right;
+	if ((IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) && current_direction_ != HeadDirection::Left)
+		next_direction_ = HeadDirection::Right;
 }
 
 void Snake::AddBodySegment()
 {
 	Vector2 tail = body_.back();
 
-	switch (direction_)
+	switch (current_direction_)
 	{
 	case HeadDirection::Left:
 		tail.x += TILE_SIZE * SCALE;
@@ -117,6 +135,14 @@ void Snake::AddBodySegment()
 	}
 
 	body_.emplace_back(tail);
+}
+
+bool Snake::CheckCollisionHeadWithBody()
+{
+	for (size_t i = 1; i < body_.size(); i++)
+		if (body_.front().x == body_[i].x && body_.front().y == body_[i].y)
+			return true;
+	return false;
 }
 
 Vector2 Snake::GetHead() const

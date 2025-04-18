@@ -16,6 +16,7 @@ class Snake
 {
 public:
 	void Init();
+	void Reset();
 
 	void Draw();
 
@@ -25,6 +26,8 @@ public:
 
 	void AddBodySegment();
 
+	bool CheckCollisionHeadWithBody();
+
 	Vector2 GetHead() const;
 	std::deque<Vector2> GetBody() const;
 
@@ -32,7 +35,8 @@ private:
 	Texture2D sprite_;
 	std::deque<Vector2> body_;
 	
-	HeadDirection direction_;
+	HeadDirection current_direction_;
+	HeadDirection next_direction_;
 
 	float move_timer_;
 	float move_interval_;

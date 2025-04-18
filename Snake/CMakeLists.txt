@@ -19,7 +19,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
-add_executable(${PROJECT_NAME} ${SOURCES}   "source/snake.cpp" "include/snake.h" "include/config.h" "include/game.h" "source/game.cpp" "source/apple.cpp" "include/apple.h")
+add_executable(${PROJECT_NAME} ${SOURCES}   "source/snake.cpp" "include/snake.h" "include/config.h" "include/game.h" "source/game.cpp" "source/apple.cpp" "include/apple.h" "source/button.cpp" "include/button.h")
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC ASSETS_PATH="${CMAKE_SOURCE_DIR}/assets/")
 
