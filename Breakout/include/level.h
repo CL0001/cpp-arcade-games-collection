@@ -1,9 +1,10 @@
 #pragma once
 
-#include <array>
+#include <vector>
 
 #include "raylib.h"
 
+#include "ball.h"
 #include "brick.h"
 
 class Level
@@ -13,9 +14,9 @@ public:
 
 	void Draw();
 
-	void Update();
+	void CheckCollision(Ball& ball);
 
 private:
 	Texture2D tileset_;
-	std::array<Brick, 96> brick_layout_;
+	std::vector<Brick> brick_layout_{96};
 };

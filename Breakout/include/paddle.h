@@ -11,6 +11,8 @@ public:
 
 	void Update();
 
+	void HandleInput();
+
 private:
 	Texture2D sprite_;
 	Rectangle hitbox_;

@@ -14,7 +14,7 @@ Game::Game()
 
 Game::~Game()
 {
-
+	CloseWindow();
 }
 
 void Game::Run()
@@ -32,6 +32,7 @@ void Game::Draw()
 	ClearBackground(Color{ 40, 40, 43 });
 
 	paddle_.Draw();
+	ball_.Draw();
 	level_.Draw();
 
 	EndDrawing();
@@ -39,5 +40,8 @@ void Game::Draw()
 
 void Game::Update()
 {
+	paddle_.Update();
+	ball_.Update();
 
+	level_.CheckCollision(ball_);
 }
