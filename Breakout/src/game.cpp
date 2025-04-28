@@ -40,8 +40,9 @@ void Game::Draw()
 
 void Game::Update()
 {
-	paddle_.Update();
-	ball_.Update();
-
+	paddle_.CheckCollision(ball_);
 	level_.CheckCollision(ball_);
+
+	paddle_.Move();
+	ball_.Move();
 }

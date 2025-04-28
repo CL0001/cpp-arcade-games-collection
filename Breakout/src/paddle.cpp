@@ -3,6 +3,7 @@
 #include <string>
 
 #include "config.h"
+#include <iostream>
 
 void Paddle::Init()
 {
@@ -28,9 +29,18 @@ void Paddle::Draw()
 	DrawTexturePro(sprite_, texture_coords, hitbox_, { 0.0f, 0.0f }, 0.0f, WHITE);
 }
 
-void Paddle::Update()
+void Paddle::Move()
 {
 	HandleInput();
+}
+
+void Paddle::CheckCollision(Ball& ball)
+{
+	if (CheckCollisionCircleRec(ball.GetPosition(), ball.GetRadius(), hitbox_))
+	{
+		std::clog << "paddle got hit\n";
+		ball.ChangeDirectionPaddle(hitbox_);
+	}
 }
 
 void Paddle::HandleInput()

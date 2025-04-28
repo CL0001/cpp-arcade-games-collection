@@ -47,12 +47,12 @@ void Level::Draw()
 
 void Level::CheckCollision(Ball& ball)
 {
-	for (uint8_t i = 0; i < brick_layout_.size(); i++)
+	for (int i = 0; i < brick_layout_.size(); i++)
 	{
 		if (CheckCollisionCircleRec(ball.GetPosition(), ball.GetRadius(), brick_layout_[i].game_coords))
 		{
+			ball.ChangeDirectionBrick(brick_layout_[i].game_coords);
 			brick_layout_.erase(brick_layout_.begin() + i);
-			ball.ChangeDirection(brick_layout_[i].game_coords);
 		}
 	}
 }

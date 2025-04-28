@@ -11,7 +11,8 @@ public:
 
 	void Move();
 
-	void ChangeDirection(Rectangle brick);
+	void ChangeDirectionPaddle(Rectangle paddle);
+	void ChangeDirectionBrick(Rectangle brick);
 
 	Vector2 GetPosition() const;
 	float GetRadius() const;

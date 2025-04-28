@@ -2,6 +2,8 @@
 
 #include "raylib.h"
 
+#include "ball.h"
+
 class Paddle
 {
 public:
@@ -9,7 +11,9 @@ public:
 
 	void Draw();
 
-	void Update();
+	void Move();
+
+	void CheckCollision(Ball& ball);
 
 	void HandleInput();
 
