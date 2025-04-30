@@ -7,8 +7,6 @@
 class Paddle
 {
 public:
-	~Paddle();
-
 	void Init();
 
 	void Draw();

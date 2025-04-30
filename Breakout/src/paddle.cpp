@@ -4,11 +4,6 @@
 
 #include "config.h"
 
-Paddle::~Paddle()
-{
-	UnloadTexture(sprite_);
-}
-
 void Paddle::Init()
 {
 	sprite_ = LoadTexture((std::string(ASSETS_PATH) + "paddle.png").c_str());

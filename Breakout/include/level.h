@@ -10,8 +10,6 @@
 class Level
 {
 public:
-	~Level();
-
 	void Init();
 
 	void Draw();

@@ -6,11 +6,6 @@
 
 #include "config.h"
 
-Level::~Level()
-{
-	UnloadTexture(tileset_);
-}
-
 void Level::Init()
 {
 	Build();

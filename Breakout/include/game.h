@@ -35,4 +35,5 @@ private:
 	int best_score_ = 0;
 
 	bool is_game_over_ = false;
+	bool exit_ = false;
 };

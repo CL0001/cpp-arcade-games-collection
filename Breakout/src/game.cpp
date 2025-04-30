@@ -16,7 +16,7 @@ Game::Game()
 	ball_.Init();
 	level_.Init();
 
-	play_again_button_.Init(GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 100, "Play Again");
+	play_again_button_.Init(GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 - 100, "Retry");
 	exit_button_.Init(GetScreenWidth() / 2 - 150, GetScreenHeight() / 2 + 100, "Exit");
 
 	std::ifstream input("game_stats.txt");
@@ -31,7 +31,7 @@ Game::~Game()
 
 void Game::Run()
 {
-	while (!WindowShouldClose())
+	while (!WindowShouldClose() && !exit_)
 	{
 		Draw();
 		Update();
@@ -148,5 +148,5 @@ void Game::Exit()
 	output << best_score_;
 	output.close();
 
-	CloseWindow();
+	exit_ = true;
 }
