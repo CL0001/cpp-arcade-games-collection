@@ -17,6 +17,8 @@ public:
 	Vector2 GetPosition() const;
 	float GetRadius() const;
 
+	void Reset();
+
 private:
 	Vector2 position_;
 	float radius_;

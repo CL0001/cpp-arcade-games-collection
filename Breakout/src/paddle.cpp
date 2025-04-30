@@ -3,7 +3,11 @@
 #include <string>
 
 #include "config.h"
-#include <iostream>
+
+Paddle::~Paddle()
+{
+	UnloadTexture(sprite_);
+}
 
 void Paddle::Init()
 {
@@ -38,7 +42,6 @@ void Paddle::CheckCollision(Ball& ball)
 {
 	if (CheckCollisionCircleRec(ball.GetPosition(), ball.GetRadius(), hitbox_))
 	{
-		std::clog << "paddle got hit\n";
 		ball.ChangeDirectionPaddle(hitbox_);
 	}
 }
@@ -60,4 +63,10 @@ void Paddle::HandleInput()
 		if (hitbox_.x + hitbox_.width > GetScreenWidth())
 			hitbox_.x = GetScreenWidth() - hitbox_.width;
 	}
+}
+
+void Paddle::Reset()
+{
+	hitbox_.x = GetScreenWidth() / 2.0f - 64;
+	hitbox_.y = GetScreenHeight() - 64.0f;
 }

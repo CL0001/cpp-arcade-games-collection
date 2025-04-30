@@ -7,6 +7,8 @@
 class Paddle
 {
 public:
+	~Paddle();
+
 	void Init();
 
 	void Draw();
@@ -16,6 +18,8 @@ public:
 	void CheckCollision(Ball& ball);
 
 	void HandleInput();
+
+	void Reset();
 
 private:
 	Texture2D sprite_;

@@ -46,9 +46,9 @@ void Ball::ChangeDirectionPaddle(Rectangle paddle)
 	move_speed_.y = -std::abs(move_speed_.y);
 
 	if (position_.x > paddle_center)
-		move_speed_.x = std::abs(move_speed_.x + 0.5f);
+		move_speed_.x = std::abs(move_speed_.x + 2.5f);
 	else
-		move_speed_.x = -std::abs(move_speed_.x + 0.5f);
+		move_speed_.x = -std::abs(move_speed_.x + 2.5f);
 }
 
 void Ball::ChangeDirectionBrick(Rectangle brick)
@@ -82,4 +82,10 @@ Vector2 Ball::GetPosition() const
 float Ball::GetRadius() const
 {
 	return radius_;
+}
+
+void Ball::Reset()
+{
+	position_ = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+	move_speed_ = { 0.0f, 3.0f };
 }
