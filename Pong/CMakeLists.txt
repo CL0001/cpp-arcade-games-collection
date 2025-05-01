@@ -22,9 +22,7 @@ FetchContent_MakeAvailable(raylib)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-	"${CMAKE_SOURCE_DIR}/headers"
-)
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/headers")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 

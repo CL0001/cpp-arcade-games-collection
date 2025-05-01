@@ -23,9 +23,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC ASSETS_PATH="${CMAKE_SOURCE_DIR}/assets/")
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-	"${CMAKE_SOURCE_DIR}/include"
-)
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/include")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
